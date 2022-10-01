@@ -7,9 +7,7 @@
  * created the constructor for you already.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 class DrivableMap {
     HashMap<String, Drivable> drivable_map;
@@ -27,7 +25,13 @@ class DrivableMap {
      *       in drivable_map, then add the pair to drivable_map.
      *       Return true if the Drivable was added to drivable_map.
      */
-
+    public boolean addDrivable(String id, Drivable obj){
+        if(((drivable_map.get(id)) == null)){
+            drivable_map.put(id, obj);
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -37,6 +41,15 @@ class DrivableMap {
      * You may want to use drivable_map.keys() or drivable_map.values() to
      * iterate through drivable_map.
      */
+    public boolean hasFasterThan(int speed){
+        Object[] all_driv = drivable_map.values().toArray();
+        for(int i = 0; i<= all_driv.length - 1; i+= 1) {
+            if (((Drivable) all_driv[i]).getMaxSpeed() >= speed) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -46,6 +59,16 @@ class DrivableMap {
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
      */
+    public List<Tradable> getTradable() {
+        ArrayList<Tradable> trade_able = new ArrayList<Tradable>();
+        Object[] all_driv = drivable_map.values().toArray();
+        for(int i = 0; i<= all_driv.length - 1; i+= 1){
+            if(all_driv[i] instanceof Tradable){
+                trade_able.add((Tradable) all_driv[i]);
+            }
+        }
+        return trade_able;
+    }
 
 
 
